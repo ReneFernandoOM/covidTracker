@@ -1,0 +1,23 @@
+.info-card {
+    border: none;
+    color: white;
+    border-radius: 1em;
+    box-shadow: 0.25em 0.5em 1em 0.5em rgba(0, 0, 0, 0.2);
+}
+
+.info-card span {
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.confirmed-card {
+    background:linear-gradient(150deg, #fac461 20%,#f76b1c 100%);
+}
+
+.deaths-card {
+    background:linear-gradient(150deg, #F5515F 20%,#A1051D 100%);
+}
+
+.vacc-card {
+    background:linear-gradient(150deg, #82b923bd 20%,#459522 100%);
+}
