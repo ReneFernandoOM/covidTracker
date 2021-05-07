@@ -1,5 +1,6 @@
 
 const appLogic = (() => {
+    const worldSpinners = [...document.querySelectorAll('.world-spinner')];
     const countriesAffectedDiv = document.querySelector('#affectedCountries');
     const casesConfirmedDiv = document.querySelector('#casesConfirmed');
     const deathsConfirmedDiv = document.querySelector('#deathsConfirmed');
@@ -43,7 +44,11 @@ const appLogic = (() => {
 
     const renderWorldData = (data) => {
         let joinedData = Object.assign({}, ...data)
-        console.log(joinedData)
+
+        worldSpinners.forEach(spinner => {
+            spinner.style.display = 'none';
+        })
+
         countriesAffectedDiv.innerText = joinedData['paisesAfectados'].toLocaleString('en-US');
         casesConfirmedDiv.innerText = joinedData['casosConf'].toLocaleString('en-US');
         deathsConfirmedDiv.innerText = joinedData['muertes'].toLocaleString('en-US');
@@ -55,9 +60,8 @@ const appLogic = (() => {
     }
 
     const _init = (() => {
-        console.log(countriesAffectedDiv)
-        worldCasesPromise = getWorldCasesData()
-        worldVaccPromise = getWorldVaccData();
-        Promise.all([worldCasesPromise, worldVaccPromise]).then(renderWorldData)
+        // worldCasesPromise = getWorldCasesData();
+        // worldVaccPromise = getWorldVaccData();
+        // Promise.all([worldCasesPromise, worldVaccPromise]).then(renderWorldData);
     })()
 })()
