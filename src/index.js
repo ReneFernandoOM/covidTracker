@@ -55,8 +55,6 @@ const appLogic = (() => {
         vaccAdminDiv.innerText = joinedData['vacAdministradas'].toLocaleString('en-US');
         vaccPers.innerText = joinedData['persVacunadas'].toLocaleString('en-US');
         vaccPersPart.innerText = joinedData['persPartVacc'].toLocaleString('en-US');
-
-
     }
 
     const _init = (() => {
@@ -65,3 +63,71 @@ const appLogic = (() => {
         // Promise.all([worldCasesPromise, worldVaccPromise]).then(renderWorldData);
     })()
 })()
+
+const countryData = (() => {
+    const countriesSelection = document.querySelector('#countryOptions');
+    const updateBtnData = document.querySelector('#updateCountryData');
+
+    const loadCountries = async () => {
+        const resp = await fetch('static/countries.json')
+        const countries = await resp.json()
+        countries.forEach(country => {
+            let option = document.createElement('option');
+            option.value = country;
+            option.text = country;
+            countriesSelection.appendChild(option);
+        })
+        $(countriesSelection).selectpicker('refresh');
+        $(countriesSelection).selectpicker('val', 'Mexico');
+    }
+
+    const getCountryHistData = async () => {
+        const resp = await fetch(`https://covid-api.mmediagroup.fr/v1/history?country=${countriesSelection.value}&status=confirmed`, {
+            mode: 'cors'
+        })
+        const jsonData = await resp.json()
+
+        return jsonData
+    }
+
+    const renderCountryConf = (jsonData) => {
+        const graphData = {
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: jsonData.All.dates,
+            }]
+        }
+        const newConfig = {
+            type: 'line',
+            data: graphData,
+            options: {
+                scales: {
+                    xAxes: { reverse: true }
+                }
+            }
+        };
+        let myChart = new Chart(
+            document.getElementById('countryHistConf'),
+            newConfig
+        );
+
+
+        console.log(jsonData.All.dates)
+
+    }
+
+    const addListeners = () => {
+        updateBtnData.addEventListener('click', () => {
+            getCountryHistData()
+                .then(data => renderCountryConf(data))
+        })
+    }
+
+    const _init = (() => {
+        loadCountries();
+        addListeners();
+    })()
+})()
+
