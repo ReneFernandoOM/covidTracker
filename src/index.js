@@ -90,12 +90,21 @@ const countryData = (() => {
         return jsonData
     }
 
+    const getCoundryHistDeathsData = async () => {
+        const resp = await fetch(`https://covid-api.mmediagroup.fr/v1/history?country=${countriesSelection.value}&status=deaths`, {
+            mode: 'cors'
+        })
+        const jsonData = await resp.json()
+
+        return jsonData
+    }
+
     const renderCountryConf = (jsonData) => {
         const graphData = {
             datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
+                label: 'Casos confirmados: ',
+                backgroundColor: 'rgb(212, 126, 15)',
+                borderColor: 'rgb(212, 126, 15)',
                 data: jsonData.All.dates,
             }]
         }
@@ -105,6 +114,10 @@ const countryData = (() => {
             options: {
                 scales: {
                     xAxes: { reverse: true }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Casos confirmados' }
                 }
             }
         };
@@ -112,16 +125,42 @@ const countryData = (() => {
             document.getElementById('countryHistConf'),
             newConfig
         );
+    }
 
-
-        console.log(jsonData.All.dates)
-
+    const renderCountryDeaths = (jsonData) => {
+        const graphData = {
+            datasets: [{
+                label: 'Defunciones: ',
+                backgroundColor: 'rgb(186, 43, 43)',
+                borderColor: 'rgb(186, 43, 43)',
+                data: jsonData.All.dates,
+            }]
+        }
+        const newConfig = {
+            type: 'line',
+            data: graphData,
+            options: {
+                scales: {
+                    xAxes: { reverse: true }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Defunciones' }
+                }
+            }
+        };
+        let myChart = new Chart(
+            document.getElementById('countryHistDeaths'),
+            newConfig
+        );
     }
 
     const addListeners = () => {
         updateBtnData.addEventListener('click', () => {
             getCountryHistData()
                 .then(data => renderCountryConf(data))
+            getCoundryHistDeathsData()
+                .then(data => renderCountryDeaths(data))
         })
     }
 
