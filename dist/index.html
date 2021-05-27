@@ -105,17 +105,82 @@
                 <button class="btn btn-outline-dark" id="updateCountryData">Actualizar datos</button>
             </div>
         </div>
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="col-lg-6">
-                <canvas id="countryHistConf"></canvas>
+        <section class="mt-5">
+            <h4 class="text-center" id="countryLabel">PAIS</h4>
+            <div class="row d-flex justify-content-center mt-3">
+                <div class="col-lg-3 mt-4">
+                    <div class="card h-100 info-card confirmed-card">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h4>Casos confirmados totales:</h4>
+                            <div class="h-100 w-100 d-flex justify-content-center align-items-center">
+                                <span id="casesConfirmedCountry"></span>
+                                <div class="spinner-border text-light country-spinner mt-2 mb-2" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mt-4">
+                    <div class="card h-100 info-card deaths-card">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h4>Muertes confirmadas totales:</h4>
+                            <div class="h-100 w-100 d-flex justify-content-center align-items-center">
+                                <span id="deathsConfirmedCountry"></span>
+                                <div class="spinner-border text-light country-spinner mt-2 mb-2" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mt-4">
+                    <div class="card h-100 info-card vacc-card">
+                        <div class="card-body text-center d-flex flex-column">
+                            <h4>Vacunas administradas</h4>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span id="vaccAdminCountry"></span>
+                                    <div class="spinner-border text-light country-spinner mt-2 mb-2" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex align-items-center">
+                                <small class="col-6 p-0">Personas vacunadas</small>
+                                <small class="col-6 p-0">Personas parcialmente vacunadas</small>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <small id="vaccPers"></small>
+                                    <div class="spinner-border spinner-border-sm country-spinner text-light mt-2"
+                                        role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small id="vaccPersPart"></small>
+                                    <div class="spinner-border spinner-border-sm country-spinner text-light mt-2"
+                                        role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row d-flex justify-content-center mt-3">
-            <div class="col-lg-6">
-                <canvas id="countryHistDeaths"></canvas>
+            <div class="row ml-5 mr-5 d-flex justify-content-center mt-5">
+                <div class="col-lg-6">
+                    <canvas id="countryHistConf"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="countryHistDeaths"></canvas>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
+
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@1.22.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@0.2.1"></script> -->

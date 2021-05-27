@@ -65,8 +65,30 @@ const appLogic = (() => {
 })()
 
 const countryData = (() => {
+    const countrySpinners = [...document.querySelectorAll('.country-spinner')];
     const countriesSelection = document.querySelector('#countryOptions');
     const updateBtnData = document.querySelector('#updateCountryData');
+    const countryLabel = document.querySelector('#countryLabel');
+
+    const getCountryData = async () => {
+        let response = await fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${countriesSelection.value}`)
+        let data = await response.json()
+        let mexicoData = data['All'];
+
+        return { 'casosConf': mexicoData['confirmed'], 'muertes': mexicoData['deaths'] }
+    }
+
+    const getCountryVaccData = async () => {
+        let response = await fetch(`https://covid-api.mmediagroup.fr/v1/vaccines?country=${countriesSelection.value}`)
+        let data = await response.json();
+        let vaccData = data['All']
+
+        return {
+            'vacAdministradas': vaccData['administered'],
+            'persVacunadas': vaccData['people_vaccinated'],
+            'persPartVacc': vaccData['people_partially_vaccinated']
+        }
+    }
 
     const loadCountries = async () => {
         const resp = await fetch('static/countries.json')
@@ -157,10 +179,13 @@ const countryData = (() => {
 
     const addListeners = () => {
         updateBtnData.addEventListener('click', () => {
+            countryLabel.innerText = countriesSelection.value;
             getCountryHistData()
                 .then(data => renderCountryConf(data))
             getCoundryHistDeathsData()
                 .then(data => renderCountryDeaths(data))
+            // getCountryData()
+            getCountryVaccData();
         })
     }
 
