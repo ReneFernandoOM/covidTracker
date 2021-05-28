@@ -106,7 +106,7 @@
             </div>
         </div>
         <section class="mt-5">
-            <h4 class="text-center" id="countryLabel">PAIS</h4>
+            <h4 class="text-center" id="countryLabel">Mexico</h4>
             <div class="row d-flex justify-content-center mt-3">
                 <div class="col-lg-3 mt-4">
                     <div class="card h-100 info-card confirmed-card">
@@ -152,14 +152,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <small id="vaccPers"></small>
+                                    <small id="vaccPersCountry"></small>
                                     <div class="spinner-border spinner-border-sm country-spinner text-light mt-2"
                                         role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <small id="vaccPersPart"></small>
+                                    <small id="vaccPersPartCountry"></small>
                                     <div class="spinner-border spinner-border-sm country-spinner text-light mt-2"
                                         role="status">
                                         <span class="sr-only">Loading...</span>
@@ -170,12 +170,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row ml-5 mr-5 d-flex justify-content-center mt-5">
-                <div class="col-lg-6">
-                    <canvas id="countryHistConf"></canvas>
+            <div class="row m-5 d-flex justify-content-center mt-5" style="min-height: 20em;">
+                <div class="col-lg-6 d-flex justify-content-center  align-items-center" id="confCol">
+                    <div class="spinner-border country-spinner mt-2 mb-2" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <canvas class="chartCountry" id="countryHistConf" style="display: none;"></canvas>
                 </div>
-                <div class="col-lg-6">
-                    <canvas id="countryHistDeaths"></canvas>
+                <div class="col-lg-6 d-flex justify-content-center align-items-center" id="deathCol">
+                    <div class="spinner-border country-spinner mt-2 mb-2" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <canvas class="chartCountry" id="countryHistDeaths" style="display: none;"></canvas>
                 </div>
             </div>
         </section>
